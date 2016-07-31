@@ -1,0 +1,14 @@
+name: redis-throttler
+summary: "TODO: Summary"
+description: "TODO: Description"
+license: MIT
+authors: Evan Surdam
+email: es@cosi.io
+homepage: https://github.com/esurdam/redis-throttler#readme
+
+development_dependencies:
+  bundler: ~> 1.10
+  rake: ~> 10.0
+  rspec: ~> 3.0
+  rubygems-tasks: ~> 0.2
+  yard: ~> 0.8
