@@ -1,6 +1,6 @@
 name: redis-throttler
-summary: "TODO: Summary"
-description: "TODO: Description"
+summary: "Redis based rate limiter"
+description: "Throttle anything in your object model and beyond"
 license: MIT
 authors: Evan Surdam
 email: es@cosi.io

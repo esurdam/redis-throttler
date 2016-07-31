@@ -1,3 +1,6 @@
+/.ideo
+*DS_Store
+/.ruby-*
 /.bundle
 /.yardoc/
 /Gemfile.lock

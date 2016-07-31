@@ -1,5 +1,7 @@
 # redis-throttler
 
+IN DEVELOPMENT
+
 * [Homepage](https://github.com/esurdam/redis-throttler#readme)
 * [Issues](https://github.com/esurdam/redis-throttler/issues)
 * [Documentation](http://rubydoc.info/gems/redis-throttler/frames)
@@ -7,7 +9,7 @@
 
 ## Description
 
-TODO: Description
+Throttle anything in your object model and beyond
 
 ## Features
 
