@@ -93,7 +93,6 @@ describe RedisThrottler do
   #   # expect(@value).to be 1
   # end
 
-
   it 'counts correclty if bucket_span equals count-interval  ' do
     @rl = RedisThrottler.new('key', {:bucket_span => 10, bucket_interval: 1})
     @rl.add('value1')

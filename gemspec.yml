@@ -7,7 +7,7 @@ email: es@cosi.io
 homepage: https://github.com/esurdam/redis-throttler#readme
 
 dependencies:
-  redis: ~> 2
+  redis: ~> 3
 
 development_dependencies:
   bundler: ~> 1.10
