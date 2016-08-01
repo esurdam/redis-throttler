@@ -16,19 +16,17 @@ module RedisThrottler
         subject = opts[:by] || :id
         limit = opts[:limit] || 5
         threshold = opts[:for] || 900
-        interval = opts[:interval] || 5
-
-        bucket_span = [interval, 600].max
+        interval = opts[:interval] || ([threshold,120].max)/120
+        bucket_span = threshold * 2
 
         throttler = RedisThrottler::Base.new("#{klass}:#{key}", bucket_interval: interval, bucket_span: bucket_span)
-        @limits[key] = "#{subject.to_s} limit #{limit} per #{threshold} sec"
+        @limits[key] = { :limit => limit, :threshold => threshold }
 
-        # includes('?') will return true
         method = "#{key}_throttler"
 
         %w(limits limits?).each do |string|
           define_singleton_method(string) { string.include?('?') || @limits }
-          define_method(string) { string.include?('?') || self.class.instance_variable_get('@limits')}
+          define_method(string) { string.include?('?') || self.class.instance_variable_get(:@limits)}
         end
 
         # i used Procs because they don't complain about arity
@@ -49,7 +47,6 @@ module RedisThrottler
           define_singleton_method("#{key}_#{magic.to_s}") { |id, within = threshold| eval meth.call(id, within) }
           define_method("#{key}_#{magic.to_s}") { |within = threshold| eval meth.call("#{self.send subject}", within) }
         end
-
       end
     end
   end

@@ -5,7 +5,7 @@ require 'timecop'
 
 class TestClass
   include RedisThrottler
-  throttle :logins, limit: 10, for: 60
+  throttle :logins, limit: 10, for: 5000
 
   def initialize
     @id = 1234
@@ -15,3 +15,5 @@ class TestClass
     @id
   end
 end
+
+@test = TestClass.new

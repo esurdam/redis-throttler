@@ -7,23 +7,23 @@ describe RedisThrottler::Base do
     @rl.send(:redis).flushdb
   end
 
-  it 'should set_bucket_expiry to the bucket_span if not defined' do
+  it 'sets set_bucket_expiry to the bucket_span if not defined' do
     expect(@rl.instance_variable_get(:@bucket_span)).to eq(@rl.instance_variable_get(:@bucket_expiry))
   end
 
-  it 'should not allow bucket count less than 3' do
+  it 'does not allow bucket count less than 3' do
     expect do
       RedisThrottler::Base.new('test', {:bucket_span => 1, :bucket_interval => 1})
     end.to raise_error(ArgumentError)
   end
 
-  it 'should not allow bucket expiry to be larger than the bucket span' do
+  it 'does not allow bucket_expiry > bucket_span' do
     expect do
       RedisThrottler::Base.new("key", {:bucket_expiry => 1200})
     end.to raise_error(ArgumentError)
   end
 
-  it 'should be able to add to the count for a given subject' do
+  it '.add(\'string\', 1)' do
     @rl.add('value1')
     @rl.add('value1')
     expect(@rl.count('value1', 1)).to eq(2)
@@ -33,12 +33,12 @@ describe RedisThrottler::Base do
     end
   end
 
-  it 'should be able to add to the count by more than 1' do
+  it '.add(\'string\', 3)' do
     @rl.add('value1', 3)
     expect(@rl.count('value1', 1)).to eq(3)
   end
 
-  it 'should be able to add to the count for a non-string subject' do
+  it '.add(123, 1)' do
     @rl.add(123)
     @rl.add(123)
     expect(@rl.count(123, 1)).to eq(2)
@@ -48,12 +48,12 @@ describe RedisThrottler::Base do
     end
   end
 
-  it 'should return counter value' do
+  it '.count' do
     counter_value = @rl.add("value1")
     expect(@rl.count("value1", 1)).to eq(counter_value)
   end
 
-  it 'respond to exceeded? method correctly' do
+  it '.exceeded?' do
     5.times do
       @rl.add("value1")
     end
@@ -69,7 +69,7 @@ describe RedisThrottler::Base do
     expect(@rl.within_bounds?("value1", {:threshold => 10, :interval => 30})).to be false
   end
 
-  it "accept a threshold and a block that gets executed once it's below the threshold" do
+  it 'accepts a threshold and a block that gets executed once it\'s below the threshold' do
     expect(@rl.count("key", 30)).to eq(0)
     31.times do
       @rl.add("key")
@@ -93,7 +93,7 @@ describe RedisThrottler::Base do
     expect(@value).to be 1
   end
 
-  it 'counts correclty if bucket_span equals count-interval  ' do
+  it 'counts correctly when bucket_span equals count-interval ' do
     @rl = RedisThrottler::Base.new('key', {:bucket_span => 10, bucket_interval: 1})
     @rl.add('value1')
     expect(@rl.count('value1', 10)).to eql(1)
