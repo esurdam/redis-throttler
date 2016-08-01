@@ -1,9 +1,6 @@
 require 'redis'
-require 'redis-throttler/model'
 
 class RedisThrottler
-  extend RedisThrottler::Model
-
   # Create a RedisThrottler object.
   #
   # @param [String] key A name to uniquely identify this rate limit. For example, 'emails'

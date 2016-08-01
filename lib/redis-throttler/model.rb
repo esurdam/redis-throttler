@@ -1,4 +1,5 @@
 require 'redis-throttler'
+
 class RedisThrottler
   module Model
 
