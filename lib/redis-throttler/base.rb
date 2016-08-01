@@ -114,7 +114,7 @@ module RedisThrottler
     end
 
     def redis
-      @redis ||= Redis.new(host: '192.168.99.100', port: 32771)
+      @redis ||= Redis.new(host: '192.168.99.100', port: 32768)
     end
   end
 end
