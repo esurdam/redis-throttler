@@ -10,8 +10,8 @@ Gem::Specification.new do |gem|
                   lib_dir = File.join(File.dirname(__FILE__),'lib')
                   $LOAD_PATH << lib_dir unless $LOAD_PATH.include?(lib_dir)
 
-                  require 'redis/throttler/version'
-                  Redis::Throttler::VERSION
+                  require 'redis-throttler/version'
+                  RedisThrottler::VERSION
                 end
 
   gem.summary     = gemspec['summary']

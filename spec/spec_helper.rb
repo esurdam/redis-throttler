@@ -1,4 +1,3 @@
 require 'rspec'
-require 'redis/throttler/version'
+require 'redis-throttler'
 
-include Redis::Throttler
