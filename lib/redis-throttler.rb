@@ -1,9 +1,12 @@
 require 'redis'
+require 'redis-throttler/model'
 
-class RedisThrottler
+module RedisThrottler
+
   def self.included(base)
     base.include(RedisThrottler::Model)
   end
+
   # Create a RedisThrottler object.
   #
   # @param [String] key A name to uniquely identify this rate limit. For example, 'emails'
