@@ -2,7 +2,7 @@ require 'redis'
 
 class RedisThrottler
   def self.included(base)
-    base.extend(RedisThrottler::Model)
+    base.include(RedisThrottler::Model)
   end
   # Create a RedisThrottler object.
   #
