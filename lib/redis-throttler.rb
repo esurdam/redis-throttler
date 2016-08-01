@@ -1,11 +1,8 @@
 require 'redis'
 require 'redis-throttler/model'
 
-module RedisThrottler
-
-  def self.included(base)
-    base.include(RedisThrottler::Model)
-  end
+class RedisThrottler
+  extend RedisThrottler::Model
 
   # Create a RedisThrottler object.
   #
