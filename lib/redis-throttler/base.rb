@@ -1,5 +1,3 @@
-require 'redis'
-
 module RedisThrottler
   class Base
     # Create a RedisThrottler object.
