@@ -3,7 +3,7 @@ require 'spec_helper'
 describe RedisThrottler do
 
   before do
-    @rl = RedisThrottler.new('test')
+    @rl = RedisThrottler::Base.new('test')
     @rl.send(:redis).flushdb
   end
 
@@ -13,13 +13,13 @@ describe RedisThrottler do
 
   it 'should not allow bucket count less than 3' do
     expect do
-      RedisThrottler.new('test', {:bucket_span => 1, :bucket_interval => 1})
+      RedisThrottler::Base.new('test', {:bucket_span => 1, :bucket_interval => 1})
     end.to raise_error(ArgumentError)
   end
 
   it 'should not allow bucket expiry to be larger than the bucket span' do
     expect do
-      RedisThrottler.new("key", {:bucket_expiry => 1200})
+      RedisThrottler::Base.new("key", {:bucket_expiry => 1200})
     end.to raise_error(ArgumentError)
   end
 
@@ -94,7 +94,7 @@ describe RedisThrottler do
   # end
 
   it 'counts correclty if bucket_span equals count-interval  ' do
-    @rl = RedisThrottler.new('key', {:bucket_span => 10, bucket_interval: 1})
+    @rl = RedisThrottler::Base.new('key', {:bucket_span => 10, bucket_interval: 1})
     @rl.add('value1')
     expect(@rl.count('value1', 10)).to eql(1)
   end

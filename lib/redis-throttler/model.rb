@@ -1,6 +1,4 @@
-require 'redis-throttler'
-
-class RedisThrottler
+module RedisThrottler
   module Model
 
     def self.included(base)
@@ -20,7 +18,7 @@ class RedisThrottler
         threshold = opts[:for] || 900
         interval = opts[:interval] || 5
 
-        limiter = RedisThrottler.new("#{klass}:#{key}", bucket_interval: interval, bucket_span: threshold)
+        limiter = RedisThrottler::Base.new("#{klass}:#{key}", bucket_interval: interval, bucket_span: threshold)
         @limits[key] = "#{subject.to_s} limit #{limit} per #{threshold} sec"
 
         # includes('?') will return true
