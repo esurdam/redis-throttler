@@ -5,7 +5,7 @@ require 'redis-throttler/base'
 
 
 module RedisThrottler
-  extend Configuration
+  extend RedisThrottler::Configuration
 
   define_setting :default_limit, 5
   define_setting :default_threshold, 600
