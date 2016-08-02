@@ -1,4 +1,4 @@
-### 0.1.8 / 2016-08-01:
+### 0.1.8 / 2016-08-02:
 
 * Add Configuration helper to allow for initializer
 * Add test for configuration
