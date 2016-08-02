@@ -10,7 +10,7 @@ module RedisThrottler
   define_setting :default_limit, 5
   define_setting :default_threshold, 600
 
-  define_setting :redis, Redis.new(host: '192.168.99.100', port: 32772)
+  define_setting :redis, Redis.new(host: 'localhost', port: 6379)
 
   def self.included(base)
     base.include(RedisThrottler::Model)
