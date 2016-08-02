@@ -1,3 +1,8 @@
+### 0.1.8 / 2016-08-01:
+
+* Add Configuration helper to allow for initializer
+* Add test for configuration
+
 ### 0.1.7 / 2016-08-01:
 
 * Fix test specs

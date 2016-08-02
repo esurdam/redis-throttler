@@ -14,8 +14,8 @@ module RedisThrottler
         key = "#{key.to_s}"
 
         subject = opts[:by] || :id
-        limit = opts[:limit] || 5
-        threshold = opts[:for] || 900
+        limit = opts[:limit] || RedisThrottler.default_limit
+        threshold = opts[:for] || RedisThrottler.default_threshold
         interval = opts[:interval] || ([threshold,120].max)/120
         bucket_span = threshold * 2
 

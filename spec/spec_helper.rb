@@ -5,7 +5,7 @@ require 'timecop'
 
 class TestClass
   include RedisThrottler
-  throttle :logins, limit: 10, for: 5000
+  throttle :logins, limit: 10, for: 3600
 
   def initialize
     @id = 1234

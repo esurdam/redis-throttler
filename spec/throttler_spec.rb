@@ -7,6 +7,20 @@ describe RedisThrottler::Base do
     @rl.send(:redis).flushdb
   end
 
+  it 'configures properly' do
+    expect(RedisThrottler.default_limit).to eq(5)
+    expect(RedisThrottler.default_threshold).to eq(600)
+    expect(RedisThrottler.redis).to be_a(Redis)
+
+    RedisThrottler.configuration do |config|
+      config.default_limit = 10
+      config.default_threshold = 900
+    end
+
+    expect(RedisThrottler.default_limit).to eq(10)
+    expect(RedisThrottler.default_threshold).to eq(900)
+  end
+
   it 'sets set_bucket_expiry to the bucket_span if not defined' do
     expect(@rl.instance_variable_get(:@bucket_span)).to eq(@rl.instance_variable_get(:@bucket_expiry))
   end
